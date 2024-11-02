@@ -51,24 +51,8 @@ public class Application {
         System.out.println("---");
         for (Winning winning : Winning.values()) {
             int count = winnings.getCount(winning);
-            printWinningResult(winning, numberFormat, count);
+            System.out.println(winning.createMessage(count));
         }
         System.out.println("총 수익률은 %.2f".formatted(winnings.getRateOfReturn()) + "%입니다.");
-    }
-
-    private static void printWinningResult(Winning winning, NumberFormat numberFormat, int count) {
-        if (winning == Winning.SECOND) {
-            System.out.println("%d개 일치, 보너스 볼 일치 (%s)원 - %d개".formatted(
-                    winning.getMatchCount(),
-                    numberFormat.format(winning.getWinningAmount()),
-                    count
-            ));
-        } else if (winning != Winning.NONE) {
-            System.out.println("%d개 일치 (%s)원 - %d개".formatted(
-                    winning.getMatchCount(),
-                    numberFormat.format(winning.getWinningAmount()),
-                    count
-            ));
-        }
     }
 }
