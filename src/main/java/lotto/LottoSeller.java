@@ -1,7 +1,13 @@
 package lotto;
 
+import static lotto.Lotto.MAX_NUMBER_INCLUDE;
+import static lotto.Lotto.MIN_NUMBER_INCLUDE;
+
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class LottoSeller {
 
@@ -9,7 +15,21 @@ public class LottoSeller {
 
     public List<Lotto> sell(int amount) {
         validateAmount(amount);
-        return new ArrayList<>();
+        int count = amount / PRICE_PER_LOTTO;
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(generateLottoNumbers()));
+        }
+        return lottos;
+    }
+
+    private Set<Integer> generateLottoNumbers() {
+        Set<Integer> numbers = new HashSet<>();
+        while (numbers.size() != 6) {
+            int number = Randoms.pickNumberInRange(MIN_NUMBER_INCLUDE, MAX_NUMBER_INCLUDE);
+            numbers.add(number);
+        }
+        return numbers;
     }
 
     private void validateAmount(int amount) {
