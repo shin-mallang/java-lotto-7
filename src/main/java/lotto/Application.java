@@ -45,14 +45,29 @@ public class Application {
     }
 
     private static void printWinningStatistics(Winnings winnings, WinningNumbers winningNumbers) {
-        NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);
         winnings.matchAll(winningNumbers);
         System.out.println("당첨 통계");
         System.out.println("---");
         for (Winning winning : Winning.values()) {
+            if (winning == Winning.NONE) {
+                continue;
+            }
             int count = winnings.getCount(winning);
-            System.out.println(winning.createMessage(count));
+            System.out.println(createWinningMessage(winning, count));
         }
+        System.out.println();
         System.out.println("총 수익률은 %.2f".formatted(winnings.getRateOfReturn()) + "%입니다.");
+    }
+
+    private static String createWinningMessage(Winning winning, int count) {
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.KOREA);
+        String matchCount = "%d개 일치 ".formatted(winning.getMatchCount());
+        String bonusMatch = winning.isBonusMatch()
+                ? ", 보너스 볼 일치"
+                : "";
+        String amountAndCount = "(%s원) - %d개".formatted(
+                numberFormat.format(winning.getWinningAmount())
+                , count);
+        return matchCount + bonusMatch + amountAndCount;
     }
 }
