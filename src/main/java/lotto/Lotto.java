@@ -1,7 +1,5 @@
 package lotto;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 public class Lotto {
@@ -10,10 +8,6 @@ public class Lotto {
     public static final int MAX_NUMBER_INCLUDE = 45;
 
     private final Set<Integer> numbers;
-
-    public Lotto(Integer... numbers) {
-        this(new HashSet<>(Arrays.asList(numbers)));
-    }
 
     public Lotto(Set<Integer> numbers) {
         validate(numbers);
