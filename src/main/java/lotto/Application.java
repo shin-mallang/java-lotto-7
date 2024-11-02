@@ -29,12 +29,12 @@ public class Application {
 
     private static WinningNumbers inputWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
-        Set<Integer> winningNumberInputs = Arrays.stream(Console.readLine().split(","))
-                .map(Integer::parseInt)
+        Set<LottoNumber> winningNumberInputs = Arrays.stream(Console.readLine().split(","))
+                .map(LottoNumber::new)
                 .collect(Collectors.toSet());
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberInputs);
         System.out.println("보너스 번호를 입력해 주세요.");
-        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(Console.readLine()));
+        LottoNumber bonusNumber = new LottoNumber(Console.readLine());
         winningNumbers.withBonusNumber(bonusNumber);
         return winningNumbers;
     }

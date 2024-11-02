@@ -8,12 +8,12 @@ public class WinningNumbers {
     private final Set<LottoNumber> numbers = new HashSet<>();
     private LottoNumber bonusNumber;
 
-    public WinningNumbers(Set<Integer> numbers) {
+    public WinningNumbers(Set<LottoNumber> numbers) {
         validateNumbers(numbers);
-        numbers.addAll(numbers);
+        numbers.addAll(this.numbers);
     }
 
-    private void validateNumbers(Set<Integer> numbers) {
+    private void validateNumbers(Set<LottoNumber> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복 없는 6개의 숫자여야 합니다.");
         }
