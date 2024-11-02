@@ -4,46 +4,48 @@ import java.util.Arrays;
 
 public enum Winning {
 
-    FIRST(2_000_000_000) {
+    FIRST(6, 2_000_000_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
-            return matchCount == 6;
+            return getMatchCount() == matchCount;
         }
     },
-    SECOND(30_000_000) {
+    SECOND(5, 30_000_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
-            return matchCount == 5 && bonusMatch;
+            return getMatchCount() == matchCount && bonusMatch;
         }
     },
-    THIRD(1_500_000) {
+    THIRD(5, 1_500_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
-            return matchCount == 5 && !bonusMatch;
+            return getMatchCount() == matchCount && !bonusMatch;
         }
     },
-    FOURTH(50_000) {
+    FOURTH(4, 50_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
-            return matchCount == 4;
+            return getMatchCount() == matchCount;
         }
     },
-    FIFTH(5_000) {
+    FIFTH(3, 5_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
-            return matchCount == 3;
+            return getMatchCount() == matchCount;
         }
     },
-    NONE(0) {
+    NONE(0, 0) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return true;
         }
     };
 
+    private final int matchCount;
     private final int winningAmount;
 
-    Winning(int winningAmount) {
+    Winning(int matchCount, int winningAmount) {
+        this.matchCount = matchCount;
         this.winningAmount = winningAmount;
     }
 
@@ -54,6 +56,10 @@ public enum Winning {
                 .filter(it -> it.match(matchCount, bonusMatch))
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("Unreachable"));
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 
     public int getWinningAmount() {
