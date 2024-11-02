@@ -1,6 +1,5 @@
 package lotto;
 
-import java.util.Map;
 import java.util.Objects;
 
 public class LottoNumber {

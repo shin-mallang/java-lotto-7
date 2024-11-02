@@ -22,12 +22,6 @@ public class Lotto {
         return numbers.contains(number);
     }
 
-    public Set<Integer> getNumbers() {
-        return numbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toSet());
-    }
-
     @Override
     public String toString() {
         String numbers = this.numbers.stream()
