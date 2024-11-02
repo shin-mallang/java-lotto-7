@@ -4,42 +4,48 @@ import java.util.Arrays;
 
 public enum Winning {
 
-    FIRST {
+    FIRST(2_000_000_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return matchCount == 6;
         }
     },
-    SECOND {
+    SECOND(30_000_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return matchCount == 5 && bonusMatch;
         }
     },
-    THIRD {
+    THIRD(1_500_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return matchCount == 5 && !bonusMatch;
         }
     },
-    FOURTH {
+    FOURTH(50_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return matchCount == 4;
         }
     },
-    FIFTH {
+    FIFTH(5_000) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return matchCount == 3;
         }
     },
-    NONE {
+    NONE(0) {
         @Override
         public boolean match(int matchCount, boolean bonusMatch) {
             return true;
         }
     };
+
+    private final int winningAmount;
+
+    Winning(int winningAmount) {
+        this.winningAmount = winningAmount;
+    }
 
     public abstract boolean match(int matchCount, boolean bonusMatch);
 
@@ -48,6 +54,9 @@ public enum Winning {
                 .filter(it -> it.match(matchCount, bonusMatch))
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("Unreachable"));
+    }
 
+    public int getWinningAmount() {
+        return winningAmount;
     }
 }
