@@ -2,7 +2,6 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,14 +33,14 @@ public class Application {
                 .collect(Collectors.toSet());
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberInputs);
         System.out.println("보너스 번호를 입력해 주세요.");
-        int bonusNumber = Integer.parseInt(Console.readLine());
+        LottoNumber bonusNumber = new LottoNumber(Integer.parseInt(Console.readLine()));;
         winningNumbers.withBonusNumber(bonusNumber);
 
         Map<Winning, Integer> winnings = new HashMap<>();
         for (Lotto lotto : lottos) {
             Winning winning = winningNumbers.match(lotto);
             Integer count = winnings.getOrDefault(winning, 0);
-            winnings.put(winning, count+ 1);
+            winnings.put(winning, count + 1);
         }
 
         System.out.println("당첨 통계");
@@ -57,8 +56,7 @@ public class Application {
             }
             if (winning == Winning.NONE) {
                 continue;
-            }
-            else {
+            } else {
                 System.out.println("%d개 일치 (%s)원 - %d개".formatted(
                         winning.getMatchCount(),
                         numberFormat.format(winning.getWinningAmount()),

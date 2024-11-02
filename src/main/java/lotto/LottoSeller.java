@@ -23,11 +23,11 @@ public class LottoSeller {
         return lottos;
     }
 
-    private Set<Integer> generateLottoNumbers() {
-        Set<Integer> numbers = new HashSet<>();
+    private Set<LottoNumber> generateLottoNumbers() {
+        Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() != 6) {
             int number = Randoms.pickNumberInRange(MIN_NUMBER_INCLUDE, MAX_NUMBER_INCLUDE);
-            numbers.add(number);
+            numbers.add(new LottoNumber(number));
         }
         return numbers;
     }
