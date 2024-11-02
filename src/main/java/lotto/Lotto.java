@@ -5,9 +5,6 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
-    public static final int MIN_NUMBER_INCLUDE = 1;
-    public static final int MAX_NUMBER_INCLUDE = 45;
-
     private final Set<LottoNumber> numbers;
 
     public Lotto(Set<LottoNumber> numbers) {
