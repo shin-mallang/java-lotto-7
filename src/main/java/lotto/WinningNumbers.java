@@ -34,4 +34,15 @@ public class WinningNumbers {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자여야 합니다.");
         }
     }
+
+    public Winning match(Lotto lotto) {
+        int matchCount = 0;
+        for (Integer number : numbers) {
+            if (lotto.contains(number)) {
+                matchCount++;
+            }
+        }
+        boolean bonusMatch = lotto.contains(bonusNumber);
+        return Winning.fromMatchCountAndBonusMatch(matchCount, bonusMatch);
+    }
 }
