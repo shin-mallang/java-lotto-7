@@ -21,10 +21,7 @@ public class Application {
         List<Lotto> lottos = lottoSeller.sell(amount);
         System.out.println("%s개를 구입했습니다.".formatted(lottos.size()));
         for (Lotto lotto : lottos) {
-            String numbers = lotto.getNumbers().stream()
-                    .map(Object::toString)
-                    .collect(Collectors.joining(","));
-            System.out.println("[%s]".formatted(numbers));
+            System.out.println(lotto);
         }
 
         System.out.println("당첨 번호를 입력해 주세요.");

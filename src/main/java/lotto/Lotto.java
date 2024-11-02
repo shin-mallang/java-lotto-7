@@ -30,4 +30,12 @@ public class Lotto {
                 .map(LottoNumber::getNumber)
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public String toString() {
+        String numbers = this.numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(","));
+        return "[%s]".formatted(numbers);
+    }
 }
