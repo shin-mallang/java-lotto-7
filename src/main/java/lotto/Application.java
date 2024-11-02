@@ -11,9 +11,10 @@ public class Application {
 
     public static void main(String[] args) {
         Lottos lottos = purchaseLotto();
-        WinningNumbers winningNumbers = inputWinningNumbers();
         Winnings winnings = new Winnings(lottos);
-        printWinningStatistics(winnings, winningNumbers);
+        WinningNumbers winningNumbers = inputWinningNumbers();
+        winnings.matchAll(winningNumbers);
+        printWinningStatistics(winnings);
     }
 
     private static Lottos purchaseLotto() {
@@ -40,8 +41,7 @@ public class Application {
         return winningNumbers;
     }
 
-    private static void printWinningStatistics(Winnings winnings, WinningNumbers winningNumbers) {
-        winnings.matchAll(winningNumbers);
+    private static void printWinningStatistics(Winnings winnings) {
         System.out.println("당첨 통계");
         System.out.println("---");
         for (Winning winning : Winning.values()) {
