@@ -9,21 +9,27 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LottoSeller {
+public class Lottos {
 
     private static final int PRICE_PER_LOTTO = 1_000;
 
-    public List<Lotto> sell(int amount) {
+    private final List<Lotto> lottos;
+
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+    }
+
+    public static Lottos purchase(int amount) {
         validateAmount(amount);
         int count = amount / PRICE_PER_LOTTO;
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lottos.add(new Lotto(generateLottoNumbers()));
         }
-        return lottos;
+        return new Lottos(lottos);
     }
 
-    private Set<LottoNumber> generateLottoNumbers() {
+    private static Set<LottoNumber> generateLottoNumbers() {
         Set<LottoNumber> numbers = new HashSet<>();
         while (numbers.size() != 6) {
             int number = Randoms.pickNumberInRange(MIN_NUMBER_INCLUDE, MAX_NUMBER_INCLUDE);
@@ -32,12 +38,20 @@ public class LottoSeller {
         return numbers;
     }
 
-    private void validateAmount(int amount) {
+    private static void validateAmount(int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 0원 이상이어야 합니다.");
         }
         if (amount % PRICE_PER_LOTTO != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1,000원 단위여야 합니다.");
         }
+    }
+
+    public int getPurchasePrice() {
+        return lottos.size() * PRICE_PER_LOTTO;
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos;
     }
 }
