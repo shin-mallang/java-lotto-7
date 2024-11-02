@@ -31,7 +31,8 @@ public class Lotto {
     @Override
     public String toString() {
         String numbers = this.numbers.stream()
-                .map(Object::toString)
+                .map(LottoNumber::getNumber)
+                .map(String::valueOf)
                 .collect(Collectors.joining(","));
         return "[%s]".formatted(numbers);
     }
