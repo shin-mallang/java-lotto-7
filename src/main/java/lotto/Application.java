@@ -53,7 +53,7 @@ public class Application {
             int count = winnings.getCount(winning);
             printWinningResult(winning, numberFormat, count);
         }
-        System.out.println("총 수익률은 %d\\%입니다.".formatted(winnings.getRateOfReturn()));
+        System.out.println("총 수익률은 %.2f".formatted(winnings.getRateOfReturn()) + "%입니다.");
     }
 
     private static void printWinningResult(Winning winning, NumberFormat numberFormat, int count) {
