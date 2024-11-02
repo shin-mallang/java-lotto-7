@@ -18,13 +18,10 @@ public class Application {
 
     private static Lottos purchaseLotto() {
         RandomNumberGenerator generator = new RandomNumberGenerator();
-
         System.out.println("구입금액을 입력해 주세요");
         int amount = Integer.parseInt(Console.readLine());
-
         Lottos lottos = Lottos.purchase(amount, generator);
         System.out.println("%s개를 구입했습니다.".formatted(lottos.getLottos().size()));
-
         for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto);
         }
@@ -37,7 +34,6 @@ public class Application {
                 .map(LottoNumber::new)
                 .collect(Collectors.toSet());
         WinningNumbers winningNumbers = new WinningNumbers(winningNumberInputs);
-
         System.out.println("보너스 번호를 입력해 주세요.");
         LottoNumber bonusNumber = new LottoNumber(Console.readLine());
         winningNumbers.withBonusNumber(bonusNumber);
